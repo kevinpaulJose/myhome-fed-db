@@ -1,0 +1,30 @@
+version: "3.7"
+
+services:
+  webapp:
+    container_name: react-docker
+    build:
+      context: ./myhome
+      dockerfile: Dockerfile
+    ports:
+      - 80:80
+    environment:
+      - CHOKIDAR_USEPOLLING=true
+  fsapi:
+    image: fsserver
+    build: ./fsserver
+    networks:
+      - backend
+    ports:
+      - "3000:3000"
+  dbapi:
+    image: dbserver
+    build: ./dbserver
+    networks:
+      - backend
+    ports:
+      - "3001:3001"
+
+networks:
+  backend:
+    driver: bridge

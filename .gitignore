@@ -1,0 +1,4 @@
+myhome/build
+myhome/node_modules
+fsserver/node_modules
+dbserver/node_modules
