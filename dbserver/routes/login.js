@@ -6,10 +6,11 @@ var sql = require("mysql");
 router.get("/", function (req, res, next) {
   var user = req.body.user;
   var password = req.body.password;
+  var server = req.body.server;
   var config = {
     user: user,
     password: password,
-    server: "localhost", // You can use 'localhost\\instance' to connect to named instance
+    server: server, // You can use 'localhost\\instance' to connect to named instance
     database: "myhome",
     options: {
       trustedConnection: true,
