@@ -40,10 +40,11 @@ router.get("/", function (req, res, next) {
 router.get("/names", function (req, res, next) {
   var user = req.body.user;
   var password = req.body.password;
+  var server = req.body.server;
   var config = {
     user: user,
     password: password,
-    server: "localhost", // You can use 'localhost\\instance' to connect to named instance
+    server: server, // You can use 'localhost\\instance' to connect to named instance
     database: "myhome",
     options: {
       trustedConnection: true,
@@ -67,10 +68,11 @@ router.get("/names", function (req, res, next) {
 router.post("/reset", function (req, res, next) {
   var user = req.body.user;
   var password = req.body.password;
+  var server = req.body.server;
   var config = {
     user: user,
     password: password,
-    server: "localhost", // You can use 'localhost\\instance' to connect to named instance
+    server: server, // You can use 'localhost\\instance' to connect to named instance
     database: "myhome",
     options: {
       trustedConnection: true,
@@ -119,10 +121,11 @@ router.post("/reset", function (req, res, next) {
 router.post("/signup", function (req, res, next) {
   var user = req.body.user;
   var password = req.body.password;
+  var server = req.body.server;
   var config = {
     user: user,
     password: password,
-    server: "localhost", // You can use 'localhost\\instance' to connect to named instance
+    server: server, // You can use 'localhost\\instance' to connect to named instance
     database: "myhome",
     options: {
       trustedConnection: true,
