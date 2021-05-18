@@ -24,7 +24,7 @@ router.get("/", function (req, res, next) {
   let get_res = `select @response as response;`;
   connection.query(query, [req.body.username], (err, rows) => {
     if (err) {
-      res.send(err.message);
+      res.send("FROM LOGIN " + err.message);
     } else {
       connection.query(get_res, [], (err, rows) => {
         if (err) {
