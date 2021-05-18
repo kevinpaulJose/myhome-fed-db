@@ -10,7 +10,7 @@ router.get("/", function (req, res, next) {
   var config = {
     user: user,
     password: password,
-    server: server, // You can use 'localhost\\instance' to connect to named instance
+    host: server, // You can use 'localhost\\instance' to connect to named instance
     database: "myhome",
     options: {
       trustedConnection: true,
