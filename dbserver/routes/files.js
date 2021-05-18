@@ -4,9 +4,11 @@ var sql = require("mssql");
 
 /* GET users listing. */
 router.post("/upload", function (req, res, next) {
+  var user = req.body.user;
+  var password = req.body.password;
   var config = {
-    user: "kevin",
-    password: "password",
+    user: user,
+    password: password,
     server: "localhost", // You can use 'localhost\\instance' to connect to named instance
     database: "myhome",
     options: {
@@ -59,9 +61,11 @@ router.post("/upload", function (req, res, next) {
 });
 
 router.get("/all", function (req, res, next) {
+  var user = req.body.user;
+  var password = req.body.password;
   var config = {
-    user: "kevin",
-    password: "password",
+    user: user,
+    password: password,
     server: "localhost", // You can use 'localhost\\instance' to connect to named instance
     database: "myhome",
     options: {
@@ -97,9 +101,11 @@ router.get("/all", function (req, res, next) {
 });
 
 router.get("/show", function (req, res, next) {
+  var user = req.body.user;
+  var password = req.body.password;
   var config = {
-    user: "kevin",
-    password: "password",
+    user: user,
+    password: password,
     server: "localhost", // You can use 'localhost\\instance' to connect to named instance
     database: "myhome",
     options: {
@@ -136,9 +142,11 @@ router.get("/show", function (req, res, next) {
 });
 
 router.get("/search", function (req, res, next) {
+  var user = req.body.user;
+  var password = req.body.password;
   var config = {
-    user: "kevin",
-    password: "password",
+    user: user,
+    password: password,
     server: "localhost", // You can use 'localhost\\instance' to connect to named instance
     database: "myhome",
     options: {
@@ -174,9 +182,11 @@ router.get("/search", function (req, res, next) {
 });
 
 router.get("/filetype", function (req, res, next) {
+  var user = req.body.user;
+  var password = req.body.password;
   var config = {
-    user: "kevin",
-    password: "password",
+    user: user,
+    password: password,
     server: "localhost", // You can use 'localhost\\instance' to connect to named instance
     database: "myhome",
     options: {
@@ -213,9 +223,11 @@ router.get("/filetype", function (req, res, next) {
 });
 
 router.delete("/delete", function (req, res, next) {
+  var user = req.body.user;
+  var password = req.body.password;
   var config = {
-    user: "kevin",
-    password: "password",
+    user: user,
+    password: password,
     server: "localhost", // You can use 'localhost\\instance' to connect to named instance
     database: "myhome",
     options: {
@@ -264,9 +276,11 @@ router.delete("/delete", function (req, res, next) {
 });
 
 router.delete("/deleteAll", function (req, res, next) {
+  var user = req.body.user;
+  var password = req.body.password;
   var config = {
-    user: "kevin",
-    password: "password",
+    user: user,
+    password: password,
     server: "localhost", // You can use 'localhost\\instance' to connect to named instance
     database: "myhome",
     options: {
@@ -314,9 +328,11 @@ router.delete("/deleteAll", function (req, res, next) {
 });
 
 router.put("/updateWatch", function (req, res, next) {
+  var user = req.body.user;
+  var password = req.body.password;
   var config = {
-    user: "kevin",
-    password: "password",
+    user: user,
+    password: password,
     server: "localhost", // You can use 'localhost\\instance' to connect to named instance
     database: "myhome",
     options: {
@@ -365,9 +381,11 @@ router.put("/updateWatch", function (req, res, next) {
 });
 
 router.put("/updateFile", function (req, res, next) {
+  var user = req.body.user;
+  var password = req.body.password;
   var config = {
-    user: "kevin",
-    password: "password",
+    user: user,
+    password: password,
     server: "localhost", // You can use 'localhost\\instance' to connect to named instance
     database: "myhome",
     options: {

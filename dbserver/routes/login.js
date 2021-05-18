@@ -1,12 +1,14 @@
 var express = require("express");
 var router = express.Router();
-var sql = require("mssql");
+var sql = require("mysql");
 
 /* GET users listing. */
 router.get("/", function (req, res, next) {
+  var user = req.body.user;
+  var password = req.body.password;
   var config = {
-    user: "kevin",
-    password: "password",
+    user: user,
+    password: password,
     server: "localhost", // You can use 'localhost\\instance' to connect to named instance
     database: "myhome",
     options: {
@@ -16,45 +18,30 @@ router.get("/", function (req, res, next) {
       trustServerCertificate: true,
     },
   };
-
-  sql.on("error", (err) => {
-    console.log("ERROR on CONNECTION");
-  });
-
-  sql
-    .connect(config)
-    .then((pool) => {
-      // Query
-      console.log("SERVER CONNECTED");
-      return pool
-        .request()
-        .input("pLoginName", sql.VarChar(20), req.body.username)
-        .input("pPassword", sql.VarChar(16), req.body.password)
-        .output("responseMessage", sql.VarChar(50))
-        .execute("Login");
-    })
-    .then((result) => {
-      console.dir(result);
-      console.log(result);
-      if (result.output.responseMessage == "User successfully logged in")
-        res.send({
-          response: true,
-          message: "Logged in Successfully",
-        });
-      res.send({
-        response: false,
-        message: "Login Failed",
+  let connection = sql.createConnection(config);
+  let query = `CALL Login(?, @response);`;
+  let get_res = `select @response as response;`;
+  connection.query(query, [req.body.username], (err, rows) => {
+    if (err) {
+      res.send(err.message);
+    } else {
+      connection.query(get_res, [], (err, rows) => {
+        if (err) {
+          res.send(err.message);
+        } else {
+          res.send(rows[0]);
+        }
       });
-    })
-    .catch((err) => {
-      console.log(err.message);
-    });
+    }
+  });
 });
 
 router.get("/names", function (req, res, next) {
+  var user = req.body.user;
+  var password = req.body.password;
   var config = {
-    user: "kevin",
-    password: "password",
+    user: user,
+    password: password,
     server: "localhost", // You can use 'localhost\\instance' to connect to named instance
     database: "myhome",
     options: {
@@ -65,34 +52,23 @@ router.get("/names", function (req, res, next) {
     },
   };
 
-  sql.on("error", (err) => {
-    console.log("ERROR on CONNECTION");
+  let connection = sql.createConnection(config);
+  let query = `call getLoginNames()`;
+  connection.query(query, [], (err, rows) => {
+    if (err) {
+      res.send(err.message);
+    } else {
+      res.send(rows);
+    }
   });
-
-  sql
-    .connect(config)
-    .then((pool) => {
-      // Query
-      console.log("SERVER CONNECTED");
-      return pool
-        .request()
-        .input("pLoginName", sql.VarChar(20), req.body.username)
-        .execute("getLoginNames");
-    })
-    .then((result) => {
-      console.dir(result);
-      console.log(result);
-      res.send(result.recordset);
-    })
-    .catch((err) => {
-      console.log(err.message);
-    });
 });
 
 router.post("/reset", function (req, res, next) {
+  var user = req.body.user;
+  var password = req.body.password;
   var config = {
-    user: "kevin",
-    password: "password",
+    user: user,
+    password: password,
     server: "localhost", // You can use 'localhost\\instance' to connect to named instance
     database: "myhome",
     options: {
@@ -140,9 +116,11 @@ router.post("/reset", function (req, res, next) {
 });
 
 router.post("/signup", function (req, res, next) {
+  var user = req.body.user;
+  var password = req.body.password;
   var config = {
-    user: "kevin",
-    password: "password",
+    user: user,
+    password: password,
     server: "localhost", // You can use 'localhost\\instance' to connect to named instance
     database: "myhome",
     options: {
