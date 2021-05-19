@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "node ./bin/www"
+    "start": "nodemon node ./bin/www"
   },
   "dependencies": {
     "body-parser": "^1.19.0",
@@ -14,6 +14,7 @@
     "jade": "~1.11.0",
     "morgan": "~1.9.1",
     "mssql": "^7.0.0",
-    "mysql": "^2.18.1"
+    "mysql": "^2.18.1",
+    "nodemon": "^2.0.7"
   }
 }
