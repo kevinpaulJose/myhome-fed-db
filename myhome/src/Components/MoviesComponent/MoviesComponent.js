@@ -15,7 +15,7 @@ class MoviesComponent extends Component {
       body: JSON.stringify({
         user: "kevin",
         password: "kevin",
-        server: "myhome.com",
+        server: "192.168.1.101",
         username: "kevin",
         showtype: "Movies",
       }),
