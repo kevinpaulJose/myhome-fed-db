@@ -151,6 +151,7 @@ router.delete("/deleteMedia", function (req, res, next) {
 });
 
 router.post("/fetchByType", function (req, res, next) {
+  console.log(req.body);
   var user = req.body.user;
   var password = req.body.password;
   var server = req.body.server;
