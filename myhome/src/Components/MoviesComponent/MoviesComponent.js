@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Banner } from "./BannerComponent";
+import { env } from "../config";
 
 class MoviesComponent extends Component {
   constructor(props) {
@@ -13,9 +14,9 @@ class MoviesComponent extends Component {
   getMovies = () => {
     fetch("http://myhome.com:3000/api/v1/media/fetchByType", {
       body: JSON.stringify({
-        user: "kevin",
-        password: "kevin",
-        server: "192.168.1.101",
+        user: env.user,
+        password: env.password,
+        server: env.sql_server_endpoint,
         username: "kevin",
         showtype: "Movies",
       }),
