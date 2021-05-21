@@ -1,58 +1,61 @@
 import React from "react";
-import FormData from "form-data";
+import { HashRouter, NavLink, Route } from "react-router-dom";
+import MoviesComponent from "../MoviesComponent/MoviesComponent";
+import SeriesComponent from "../SeriesComponent/SeriesComponent";
+import "./dashboard.css";
 
 class DashboardComponent extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      userFile: "",
-      sample: "Sample",
+      selected: "Movies",
+      search: "",
     };
-    this.uploadForm = this.uploadForm.bind(this);
   }
-  uploadForm(e) {
-    e.preventDefault();
-    var formData = new FormData();
-    console.log(this.state.userFile);
-    for (let i = 0; i < this.state.userFile.length; i++) {
-      // return;
-      console.log(this.state.userFile[i]);
-      formData.append(
-        "userFile",
-        this.state.userFile[i],
-        this.state.userFile[i].name
-      );
-    }
-    fetch("http://localhost:3001/api/v1/upload", {
-      body: formData,
-      method: "post",
-      headers: {
-        primarypath: "../public",
-        filepath: "/Kevin/Series/Timon",
-      },
-    })
-      .then((response) => response.json())
-      .then((data) => console.log(data.response));
-  }
+
+  toggleScreen = () => {
+    this.state.selected === "Movies"
+      ? this.setState({ selected: "Series" })
+      : this.setState({ selected: "Movies" });
+  };
   render() {
-    // console.log(this.props);
     return (
-      <div>
-        <form onSubmit={this.uploadForm}>
-          <input
-            type="file"
-            name="userFile"
-            multiple
-            id="userFile"
-            onChange={(e) => {
-              this.setState({ userFile: e.target.files });
-              // console.log(this.state);
-            }}
-          />
-          <button type="submit">Submit </button>
-        </form>
-      </div>
+      <HashRouter>
+        <div>
+          <ul className="header">
+            <li onClick={this.toggleScreen}>
+              <NavLink exact to="/">
+                <span>Movies</span>
+              </NavLink>
+            </li>
+            <li onClick={this.toggleScreen}>
+              <NavLink to="/series">
+                <span>Series</span>
+              </NavLink>
+            </li>
+            <li>
+              <div id="search" className="form-outline">
+                <input
+                  className="form-control"
+                  placeholder={"Search " + this.state.selected}
+                  value={this.state.search}
+                  onChange={(e) => this.setState({ search: e.target.value })}
+                />
+              </div>
+            </li>
+          </ul>
+          <div className="content">
+            <Route
+              exact
+              path="/"
+              component={() => <MoviesComponent search={this.state.search} />}
+            />
+            <Route path="/series" component={SeriesComponent} />
+          </div>
+        </div>
+        {/* <div id="footer">Current user: Kevin</div> */}
+      </HashRouter>
     );
   }
 }

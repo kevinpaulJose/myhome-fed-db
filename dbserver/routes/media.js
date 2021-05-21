@@ -150,7 +150,7 @@ router.delete("/deleteMedia", function (req, res, next) {
   );
 });
 
-router.get("/fetchByType", function (req, res, next) {
+router.post("/fetchByType", function (req, res, next) {
   var user = req.body.user;
   var password = req.body.password;
   var server = req.body.server;
@@ -187,7 +187,7 @@ router.get("/fetchByType", function (req, res, next) {
   );
 });
 
-router.get("/fetchByTypeAll", function (req, res, next) {
+router.post("/fetchByTypeAll", function (req, res, next) {
   var user = req.body.user;
   var password = req.body.password;
   var server = req.body.server;
@@ -220,7 +220,7 @@ router.get("/fetchByTypeAll", function (req, res, next) {
   });
 });
 
-router.get("/search", function (req, res, next) {
+router.post("/search", function (req, res, next) {
   var user = req.body.user;
   var password = req.body.password;
   var server = req.body.server;

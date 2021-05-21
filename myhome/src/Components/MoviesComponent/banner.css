@@ -1,0 +1,41 @@
+img {
+  -webkit-user-drag: none;
+  -moz-user-drag: none;
+  -o-user-drag: none;
+}
+img {
+  pointer-events: none;
+}
+.movie_card {
+  padding: 0 !important;
+  width: 350px;
+  margin: 14px;
+  height: 500px;
+  border-radius: 5%;
+  box-shadow: 0 3px 4px 0 rgba(0, 0, 0, 0.2), 0 4px 15px 0 rgba(0, 0, 0, 0.19);
+  background: linear-gradient(-45deg, #090a0d, #063040, #3d5037, #583c4a);
+  /* background-color: red; */
+}
+
+.movie_card img {
+  border-top-left-radius: 5%;
+  border-top-right-radius: 5%;
+  height: 440px;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+.card-title {
+  color: #afafaf;
+  font-size: medium;
+}
+.play_button {
+  background-color: #0ed990;
+  position: absolute;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  right: 20px;
+  bottom: 30px;
+  cursor: pointer;
+  text-align: center;
+}
