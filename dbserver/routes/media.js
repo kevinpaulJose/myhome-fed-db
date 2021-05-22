@@ -3,9 +3,9 @@ var router = express.Router();
 var sql = require("mysql");
 
 var config = {
-  user: user,
-  password: password,
-  host: server, // You can use 'localhost\\instance' to connect to named instance
+  user: "kevin",
+  password: "kevin",
+  host: "myhome.com", // You can use 'localhost\\instance' to connect to named instance
   database: "myhome",
   options: {
     trustedConnection: true,
