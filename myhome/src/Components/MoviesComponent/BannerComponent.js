@@ -13,28 +13,55 @@ export function Banner(props) {
     props.ShowName +
     ".jfif";
   var URL_Usable = URL.split(" ").join("_");
-  console.log(URL_Usable);
   return (
-    <div className="row justify-content-center">
-      <div className="card movie_card">
-        <img src={URL_Usable} className="card-img-top" alt="..." />
-        <div className="card-body">
-          <a href={props.URL}>
-            <div className="play_button">
-              <span>
-                <FontAwesomeIcon
-                  transform="down-19 grow-2.5"
-                  icon={faPlay}
-                  size="sm"
-                  style={{ color: "#fff" }}
-                />
-              </span>
-            </div>
-          </a>
-
-          <span className="card-title">POKEMON Detective Pikachu</span>
+    <div className="card movie_card">
+      <img src={URL_Usable} className="card-img-top" alt="..." />
+      <div className="card-body">
+        <div onClick={() => getVideo(props.ShowPath)}>
+          <div className="play_button">
+            <span>
+              <FontAwesomeIcon
+                transform="down-19 grow-2.5"
+                icon={faPlay}
+                size="sm"
+                style={{ color: "#fff" }}
+              />
+            </span>
+          </div>
         </div>
+
+        <span className="card-title">{props.ShowName}</span>
       </div>
     </div>
   );
+}
+
+function getVideo(ShowPath) {
+  fetch(env.db_server_endpoint + ":3000/api/v1/files/show", {
+    body: JSON.stringify({
+      user: env.user,
+      password: env.password,
+      server: env.sql_server_endpoint,
+      username: env.username,
+      filepath: ShowPath,
+    }),
+    method: "post",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    },
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      // console.log(data);
+      if (data.response) {
+        var videoURL =
+          env.file_server_endpoint +
+          ":3002" +
+          data.rows[0].FileUrl.split(" ").join("_");
+        window.open(videoURL);
+        // console.log(videoURL);
+      }
+    })
+    .catch((err) => console.log(err.message));
 }

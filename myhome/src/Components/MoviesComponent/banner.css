@@ -21,8 +21,6 @@ img {
   border-top-left-radius: 5%;
   border-top-right-radius: 5%;
   height: 440px;
-  margin: 0 !important;
-  padding: 0 !important;
 }
 .card-title {
   color: #afafaf;
@@ -38,4 +36,14 @@ img {
   bottom: 30px;
   cursor: pointer;
   text-align: center;
+}
+
+.component {
+  display: inline-block;
+}
+
+@media (max-width: 767px) {
+  .component {
+    display: block;
+  }
 }
