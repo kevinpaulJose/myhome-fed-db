@@ -91,11 +91,11 @@ router.put("/", function (req, res, next) {
   );
 });
 
-router.devare("/devareMedia", function (req, res, next) {
+router.delete("/deleteMedia", function (req, res, next) {
   var user = req.body.user;
   var password = req.body.password;
   var server = req.body.server;
-  var query = `CALL DevareMedia(?,?,?, @response);`;
+  var query = `CALL deleteMedia(?,?,?, @response);`;
   var get_res = `select @response as response;`;
   connection.query(
     query,
