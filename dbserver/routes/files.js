@@ -91,7 +91,7 @@ router.get("/search", function (req, res, next) {
   });
 });
 
-router.get("/show", function (req, res, next) {
+router.post("/show", function (req, res, next) {
   var user = req.body.user;
   var password = req.body.password;
   var server = req.body.server;
