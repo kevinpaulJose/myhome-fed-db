@@ -2,6 +2,7 @@ import React from "react";
 import { HashRouter, NavLink, Route } from "react-router-dom";
 import MoviesComponent from "../MoviesComponent/MoviesComponent";
 import SeriesComponent from "../SeriesComponent/SeriesComponent";
+import UploadComponent from "../Upload/UploadComponent";
 import "./dashboard.css";
 
 class DashboardComponent extends React.Component {
@@ -52,6 +53,7 @@ class DashboardComponent extends React.Component {
               component={() => <MoviesComponent search={this.state.search} />}
             />
             <Route path="/series" component={SeriesComponent} />
+            <Route path="/upload" component={UploadComponent} />
           </div>
         </div>
         {/* <div id="footer">Current user: Kevin</div> */}

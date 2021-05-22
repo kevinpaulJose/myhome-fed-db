@@ -1,0 +1,22 @@
+label {
+  color: #fff;
+  /* padding-bottom: 10px; */
+  opacity: 0.5;
+}
+
+.form-group {
+  padding-bottom: 10px;
+}
+
+input {
+  opacity: 0.5;
+}
+
+button {
+  opacity: 0.8;
+}
+
+h1 {
+  padding-bottom: 20px;
+  color: #fff;
+}

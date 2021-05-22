@@ -2,16 +2,22 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
 import "./banner.css";
 import { faPlay } from "@fortawesome/free-solid-svg-icons";
+import { env } from "../config";
 
 export function Banner(props) {
+  var URL =
+    env.file_server_endpoint +
+    ":3002/" +
+    props.ShowPath +
+    "/" +
+    props.ShowName +
+    ".jfif";
+  var URL_Usable = URL.split(" ").join("_");
+  console.log(URL_Usable);
   return (
     <div className="row justify-content-center">
       <div className="card movie_card">
-        <img
-          src="https://www.joblo.com/assets/images/joblo/posters/2019/02/detective-pikachu-trailer-poster-main.jpg"
-          className="card-img-top"
-          alt="..."
-        />
+        <img src={URL_Usable} className="card-img-top" alt="..." />
         <div className="card-body">
           <a href={props.URL}>
             <div className="play_button">

@@ -42,11 +42,16 @@ class MoviesComponent extends Component {
   }
 
   render() {
-    return (
-      <div>
-        <Banner URL="http://uat.myhome.com:3002/Kevin/Movies/Marvel_Chronology/Cancelling_CC_profile_showing_Admin_page.mp4" />
-      </div>
-    );
+    return this.state.movies.map((movie) => {
+      var URL = "";
+      return (
+        <Banner
+          key={movie.ShowID}
+          ShowPath={movie.ShowPath}
+          ShowName={movie.ShowName}
+        />
+      );
+    });
   }
 }
 
