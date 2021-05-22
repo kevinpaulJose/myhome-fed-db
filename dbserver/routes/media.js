@@ -2,26 +2,27 @@ var express = require("express");
 var router = express.Router();
 var sql = require("mysql");
 
+var config = {
+  user: user,
+  password: password,
+  host: server, // You can use 'localhost\\instance' to connect to named instance
+  database: "myhome",
+  options: {
+    trustedConnection: true,
+    encrypt: true,
+    enableArithAbort: true,
+    trustServerCertificate: true,
+  },
+};
+var connection = sql.createConnection(config);
+
 /* GET users listing. */
 router.post("/", function (req, res, next) {
   var user = req.body.user;
   var password = req.body.password;
   var server = req.body.server;
-  var config = {
-    user: user,
-    password: password,
-    host: server, // You can use 'localhost\\instance' to connect to named instance
-    database: "myhome",
-    options: {
-      trustedConnection: true,
-      encrypt: true,
-      enableArithAbort: true,
-      trustServerCertificate: true,
-    },
-  };
-  let connection = sql.createConnection(config);
-  let query = `CALL AddMedia(?,?,?,?,?, @response);`;
-  let get_res = `select @response as response;`;
+  var query = `CALL AddMedia(?,?,?,?,?, @response);`;
+  var get_res = `select @response as response;`;
   connection.query(
     query,
     [
@@ -60,21 +61,8 @@ router.put("/", function (req, res, next) {
   var user = req.body.user;
   var password = req.body.password;
   var server = req.body.server;
-  var config = {
-    user: user,
-    password: password,
-    host: server, // You can use 'localhost\\instance' to connect to named instance
-    database: "myhome",
-    options: {
-      trustedConnection: true,
-      encrypt: true,
-      enableArithAbort: true,
-      trustServerCertificate: true,
-    },
-  };
-  let connection = sql.createConnection(config);
-  let query = `CALL UpdateMedia(?,?,?, @response);`;
-  let get_res = `select @response as response;`;
+  var query = `CALL UpdateMedia(?,?,?, @response);`;
+  var get_res = `select @response as response;`;
   connection.query(
     query,
     [req.body.showid, req.body.showname, req.body.showpath],
@@ -103,25 +91,12 @@ router.put("/", function (req, res, next) {
   );
 });
 
-router.delete("/deleteMedia", function (req, res, next) {
+router.devare("/devareMedia", function (req, res, next) {
   var user = req.body.user;
   var password = req.body.password;
   var server = req.body.server;
-  var config = {
-    user: user,
-    password: password,
-    host: server, // You can use 'localhost\\instance' to connect to named instance
-    database: "myhome",
-    options: {
-      trustedConnection: true,
-      encrypt: true,
-      enableArithAbort: true,
-      trustServerCertificate: true,
-    },
-  };
-  let connection = sql.createConnection(config);
-  let query = `CALL DeleteMedia(?,?,?, @response);`;
-  let get_res = `select @response as response;`;
+  var query = `CALL DevareMedia(?,?,?, @response);`;
+  var get_res = `select @response as response;`;
   connection.query(
     query,
     [req.body.showid, req.body.username, req.body.showpath],
@@ -155,20 +130,7 @@ router.post("/fetchByType", function (req, res, next) {
   var user = req.body.user;
   var password = req.body.password;
   var server = req.body.server;
-  var config = {
-    user: user,
-    password: password,
-    host: server, // You can use 'localhost\\instance' to connect to named instance
-    database: "myhome",
-    options: {
-      trustedConnection: true,
-      encrypt: true,
-      enableArithAbort: true,
-      trustServerCertificate: true,
-    },
-  };
-  let connection = sql.createConnection(config);
-  let query = `CALL fetchMediaByType(?,?);`;
+  var query = `CALL fetchMediaByType(?,?);`;
   connection.query(
     query,
     [req.body.username, req.body.showtype],
@@ -192,20 +154,7 @@ router.post("/fetchByTypeAll", function (req, res, next) {
   var user = req.body.user;
   var password = req.body.password;
   var server = req.body.server;
-  var config = {
-    user: user,
-    password: password,
-    host: server, // You can use 'localhost\\instance' to connect to named instance
-    database: "myhome",
-    options: {
-      trustedConnection: true,
-      encrypt: true,
-      enableArithAbort: true,
-      trustServerCertificate: true,
-    },
-  };
-  let connection = sql.createConnection(config);
-  let query = `CALL fetchMediaByTypeAll(?);`;
+  var query = `CALL fetchMediaByTypeAll(?);`;
   connection.query(query, [req.body.showtype], (err, rows) => {
     if (err) {
       res.send({
@@ -225,20 +174,7 @@ router.post("/search", function (req, res, next) {
   var user = req.body.user;
   var password = req.body.password;
   var server = req.body.server;
-  var config = {
-    user: user,
-    password: password,
-    host: server, // You can use 'localhost\\instance' to connect to named instance
-    database: "myhome",
-    options: {
-      trustedConnection: true,
-      encrypt: true,
-      enableArithAbort: true,
-      trustServerCertificate: true,
-    },
-  };
-  let connection = sql.createConnection(config);
-  let query = `CALL searchMedia(?);`;
+  var query = `CALL searchMedia(?);`;
   connection.query(query, [req.body.showname], (err, rows) => {
     if (err) {
       res.send({
