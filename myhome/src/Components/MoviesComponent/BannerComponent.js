@@ -55,12 +55,13 @@ function getVideo(ShowPath) {
     .then((data) => {
       // console.log(data);
       if (data.response) {
+        // console.log(data);
         var videoURL =
           env.file_server_endpoint +
           ":3002" +
           data.rows[0].FileUrl.split(" ").join("_");
-        window.open(videoURL);
-        // console.log(videoURL);
+        // console.log(window.location.href);
+        window.location.href = window.location.href + "video/?" + videoURL;
       }
     })
     .catch((err) => console.log(err.message));

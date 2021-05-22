@@ -3,6 +3,7 @@ import { HashRouter, NavLink, Route } from "react-router-dom";
 import MoviesComponent from "../MoviesComponent/MoviesComponent";
 import SeriesComponent from "../SeriesComponent/SeriesComponent";
 import UploadComponent from "../Upload/UploadComponent";
+import VideoComponent from "../VideoComponent/VideoComponent";
 import "./dashboard.css";
 
 class DashboardComponent extends React.Component {
@@ -54,6 +55,7 @@ class DashboardComponent extends React.Component {
             />
             <Route path="/series" component={SeriesComponent} />
             <Route path="/upload" component={UploadComponent} />
+            <Route path="/video" component={VideoComponent} />
           </div>
         </div>
         {/* <div id="footer">Current user: Kevin</div> */}
