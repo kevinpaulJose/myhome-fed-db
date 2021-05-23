@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Banner } from "./BannerComponent";
 import { env } from "../config";
+import { LoadingBanner } from "../Dashboard/LoadingBanner";
 
 class MoviesComponent extends Component {
   constructor(props) {
@@ -8,11 +9,13 @@ class MoviesComponent extends Component {
 
     this.state = {
       movies: [],
+      isLoading: false,
     };
     this.getMovies = this.getMovies.bind(this);
   }
 
   getMovies = () => {
+    this.setState({ isLoading: true });
     var search = this.props.search;
     if (search.length === 0) {
       fetch(env.db_server_endpoint + ":3000/api/v1/media/fetchByType", {
@@ -33,7 +36,7 @@ class MoviesComponent extends Component {
         .then((data) => {
           // console.log(data);
           if (data.response) {
-            this.setState({ movies: data.rows });
+            this.setState({ movies: data.rows, isLoading: false });
             console.log(this.state.movies);
           }
         })
@@ -56,7 +59,7 @@ class MoviesComponent extends Component {
         .then((data) => {
           // console.log(data);
           if (data.response) {
-            this.setState({ movies: data.rows });
+            this.setState({ movies: data.rows, isLoading: false });
           }
         })
         .catch((err) => console.log(err.message));
@@ -68,6 +71,13 @@ class MoviesComponent extends Component {
   }
 
   render() {
+    if (this.state.isLoading) {
+      return (
+        <div>
+          <LoadingBanner />
+        </div>
+      );
+    }
     return (
       <div className="row justify-content-center">
         {this.state.movies.map((movie) => {

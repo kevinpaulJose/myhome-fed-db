@@ -1,5 +1,7 @@
 import React from "react";
 import { HashRouter, NavLink, Route } from "react-router-dom";
+import EpisodesComponent from "../EpisodesComponent/EpisodeComponent";
+import GalleryComponent from "../GalleryComponent/GalleryComponent";
 import MoviesComponent from "../MoviesComponent/MoviesComponent";
 import SeriesComponent from "../SeriesComponent/SeriesComponent";
 import UploadComponent from "../Upload/UploadComponent";
@@ -11,36 +13,34 @@ class DashboardComponent extends React.Component {
     super(props);
 
     this.state = {
-      selected: "Movies",
       search: "",
     };
   }
-
-  toggleScreen = () => {
-    this.state.selected === "Movies"
-      ? this.setState({ selected: "Series" })
-      : this.setState({ selected: "Movies" });
-  };
   render() {
     return (
       <HashRouter>
         <div>
           <ul className="header">
-            <li onClick={this.toggleScreen}>
+            <li>
               <NavLink exact to="/">
                 <span>Movies</span>
               </NavLink>
             </li>
-            <li onClick={this.toggleScreen}>
+            <li>
               <NavLink to="/series">
                 <span>Series</span>
+              </NavLink>
+            </li>
+            <li>
+              <NavLink to="/gallery">
+                <span>Gallery</span>
               </NavLink>
             </li>
             <li>
               <div id="search" className="form-outline">
                 <input
                   className="form-control"
-                  placeholder={"Search " + this.state.selected}
+                  placeholder={"Search"}
                   value={this.state.search}
                   onChange={(e) => this.setState({ search: e.target.value })}
                 />
@@ -53,7 +53,17 @@ class DashboardComponent extends React.Component {
               path="/"
               component={() => <MoviesComponent search={this.state.search} />}
             />
-            <Route path="/series" component={SeriesComponent} />
+            <Route
+              exact
+              path="/series"
+              component={() => <SeriesComponent search={this.state.search} />}
+            />
+            <Route
+              path="/gallery"
+              component={() => <GalleryComponent search={this.state.search} />}
+            />
+            <Route path="/series/episodes" component={EpisodesComponent} />
+
             <Route path="/upload" component={UploadComponent} />
             <Route path="/video" component={VideoComponent} />
           </div>

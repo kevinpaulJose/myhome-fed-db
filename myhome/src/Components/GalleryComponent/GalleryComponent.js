@@ -3,18 +3,18 @@ import { Banner } from "./BannerComponent";
 import { env } from "../config";
 import { LoadingBanner } from "../Dashboard/LoadingBanner";
 
-class SeriesComponent extends Component {
+class GalleryComponent extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      series: [],
+      albums: [],
       isLoading: false,
     };
-    this.getSeries = this.getSeries.bind(this);
+    this.getAlbums = this.getAlbums.bind(this);
   }
 
-  getSeries = () => {
+  getAlbums = () => {
     this.setState({ isLoading: true });
     var search = this.props.search;
     if (search.length === 0) {
@@ -24,7 +24,7 @@ class SeriesComponent extends Component {
           password: env.password,
           server: env.sql_server_endpoint,
           username: "kevin",
-          showtype: "Series",
+          showtype: "Albums",
         }),
         method: "post",
         headers: {
@@ -36,8 +36,8 @@ class SeriesComponent extends Component {
         .then((data) => {
           // console.log(data);
           if (data.response) {
-            this.setState({ series: data.rows, isLoading: false });
-            console.log(this.state.series);
+            this.setState({ albums: data.rows, isLoading: false });
+            console.log(this.state.albums);
           }
         })
         .catch((err) => console.log(err.message));
@@ -59,12 +59,12 @@ class SeriesComponent extends Component {
         .then((data) => {
           // console.log(data);
           if (data.response) {
-            var series = [];
+            var albums = [];
             var temp = data.rows;
             for (let i = 0; i < temp.length; i++) {
-              if (temp[i].ShowType === "Series") series.push(temp[i]);
+              if (temp[i].ShowType === "Albums") albums.push(temp[i]);
             }
-            this.setState({ series: series, isLoading: false });
+            this.setState({ albums: albums, isLoading: false });
           }
         })
         .catch((err) => console.log(err.message));
@@ -72,7 +72,7 @@ class SeriesComponent extends Component {
   };
 
   componentDidMount() {
-    this.getSeries();
+    this.getAlbums();
   }
 
   render() {
@@ -85,7 +85,7 @@ class SeriesComponent extends Component {
     }
     return (
       <div className="row justify-content-center">
-        {this.state.series.map((media) => {
+        {this.state.albums.map((media) => {
           return (
             <Banner
               key={media.ShowID}
@@ -99,4 +99,4 @@ class SeriesComponent extends Component {
   }
 }
 
-export default SeriesComponent;
+export default GalleryComponent;

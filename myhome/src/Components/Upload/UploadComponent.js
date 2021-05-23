@@ -24,7 +24,7 @@ class UploadComponent extends Component {
   uploadFile_db = () => {
     console.log("Upload File Called");
     for (let i = 0; i < this.state.mediaFile.length; i++) {
-      console.log("Uploading " + i);
+      // console.log("Uploading " + i);
       fetch(env.db_server_endpoint + ":3000/api/v1/files/upload", {
         body: JSON.stringify({
           user: env.user,
@@ -63,19 +63,20 @@ class UploadComponent extends Component {
           // if (data.response) {
           //   console.log(data)
           // }
-          console.log(data);
-          console.log(
-            "URL: " +
-              "/" +
-              env.username +
-              "/" +
-              this.state.mediaType +
-              "/" +
-              this.state.mediaName +
-              "/" +
-              this.state.mediaFile[i].name
-          );
+          // console.log(data);
+          // console.log(
+          //   "URL: " +
+          //     "/" +
+          //     env.username +
+          //     "/" +
+          //     this.state.mediaType +
+          //     "/" +
+          //     this.state.mediaName +
+          //     "/" +
+          //     this.state.mediaFile[i].name
+          // );
           this.setState({ isLoading: false });
+          window.location.href = env.web_server;
         })
         .catch((err) => console.log(err.message));
     }
@@ -173,7 +174,13 @@ class UploadComponent extends Component {
       .then((response) => response.json())
       .then((data) => {
         // console.log(data.response);
-        this.uploadBanner(e);
+        if (data.response === "ERROR") {
+          this.setState({ isLoading: false });
+
+          alert("Upload Failed");
+        } else {
+          this.uploadBanner(e);
+        }
       });
   }
 
@@ -196,6 +203,7 @@ class UploadComponent extends Component {
               >
                 <option>Movies</option>
                 <option>Series</option>
+                <option>Albums</option>
               </select>
             </div>
             <div className="form-group">
