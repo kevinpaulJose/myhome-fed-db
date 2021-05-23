@@ -5,6 +5,6 @@ export const env = {
   sql_server_endpoint: "myhome.com",
   file_server_endpoint: "http://192.168.1.101",
   db_server_endpoint: "http://192.168.1.101",
-  web_server: "http://192.168.1.101",
+  web_server: "http://192.168.1.100",
   cast_URL: "https://goofy-hopper-4a9961.netlify.app/?",
 };

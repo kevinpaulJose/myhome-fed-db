@@ -3,8 +3,11 @@ import { NavLink } from "react-router-dom";
 import { env } from "../config";
 import { LoadingBanner } from "../Dashboard/LoadingBanner";
 import { Banner } from "./BannerComponent";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTimes } from "@fortawesome/free-solid-svg-icons";
+import "./full_screen.css";
 
-class EpisodesComponent extends React.Component {
+class ImagesComponent extends React.Component {
   constructor(props) {
     super(props);
 
@@ -12,8 +15,40 @@ class EpisodesComponent extends React.Component {
       ShowPath: "",
       episodes: [],
       isLoading: false,
+      selected: false,
+      selectedUrl: "",
     };
     this.getEpisodes = this.getEpisodes.bind(this);
+    this.ImgFullScreen = this.ImgFullScreen.bind(this);
+  }
+
+  ImgFullScreen(props) {
+    return (
+      <div
+        className="fullScreen"
+        style={{ display: this.state.selected ? "block" : "none" }}
+      >
+        <img
+          className="full_screen_img"
+          src={this.state.selectedUrl}
+          alt="custom_image"
+        ></img>
+        <div
+          className="close"
+          onClick={() => {
+            this.setState({ selected: false, selectedUrl: "" });
+          }}
+        >
+          <span style={{ opacity: "0.7" }}>
+            <FontAwesomeIcon
+              icon={faTimes}
+              size="3x"
+              style={{ color: "#fff" }}
+            />
+          </span>
+        </div>
+      </div>
+    );
   }
 
   componentDidMount() {
@@ -31,18 +66,30 @@ class EpisodesComponent extends React.Component {
     }
     return (
       <div>
-        <NavLink id="NavLink" to="/series">
-          <span id="breadNav">{"< Series"}</span>
+        <this.ImgFullScreen />
+        <NavLink id="NavLink" to="/gallery">
+          <span id="breadNav">{"< Gallery"}</span>
         </NavLink>
         <h3>{this.state.ShowPath.split("/")[3]}</h3>
         <div className="row">
           {this.state.episodes.map((episode) => {
             return (
-              <Banner
+              <div
                 key={episode.FileID}
-                FileUrl={episode.FileUrl}
-                FileName={episode.FileName}
-              />
+                className="outer-div"
+                onClick={() => {
+                  var temp =
+                    env.file_server_endpoint + ":3002" + episode.FileUrl;
+                  var usableUrl = temp.split(" ").join("_");
+                  this.setState({
+                    selected: true,
+                    selectedUrl: usableUrl,
+                  });
+                  console.log(usableUrl);
+                }}
+              >
+                <Banner FileUrl={episode.FileUrl} FileName={episode.FileName} />
+              </div>
             );
           })}
         </div>
@@ -78,4 +125,4 @@ class EpisodesComponent extends React.Component {
       .catch((err) => console.log(err.message));
   }
 }
-export default EpisodesComponent;
+export default ImagesComponent;

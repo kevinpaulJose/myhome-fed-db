@@ -2,6 +2,7 @@ import React from "react";
 import { HashRouter, NavLink, Route } from "react-router-dom";
 import EpisodesComponent from "../EpisodesComponent/EpisodeComponent";
 import GalleryComponent from "../GalleryComponent/GalleryComponent";
+import ImagesComponent from "../ImagesComponent/ImagesComponent";
 import MoviesComponent from "../MoviesComponent/MoviesComponent";
 import SeriesComponent from "../SeriesComponent/SeriesComponent";
 import UploadComponent from "../Upload/UploadComponent";
@@ -59,11 +60,12 @@ class DashboardComponent extends React.Component {
               component={() => <SeriesComponent search={this.state.search} />}
             />
             <Route
+              exact
               path="/gallery"
               component={() => <GalleryComponent search={this.state.search} />}
             />
             <Route path="/series/episodes" component={EpisodesComponent} />
-
+            <Route path="/gallery/images" component={ImagesComponent} />
             <Route path="/upload" component={UploadComponent} />
             <Route path="/video" component={VideoComponent} />
           </div>

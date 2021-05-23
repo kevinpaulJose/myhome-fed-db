@@ -57,9 +57,13 @@ class MoviesComponent extends Component {
       })
         .then((response) => response.json())
         .then((data) => {
-          // console.log(data);
           if (data.response) {
-            this.setState({ movies: data.rows, isLoading: false });
+            var movies = [];
+            var temp = data.rows;
+            for (let i = 0; i < temp.length; i++) {
+              if (temp[i].ShowType === "Movies") movies.push(temp[i]);
+            }
+            this.setState({ movies: movies, isLoading: false });
           }
         })
         .catch((err) => console.log(err.message));
@@ -79,7 +83,7 @@ class MoviesComponent extends Component {
       );
     }
     return (
-      <div className="row justify-content-center">
+      <div className="row">
         {this.state.movies.map((movie) => {
           return (
             <Banner

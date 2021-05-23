@@ -84,7 +84,7 @@ class SeriesComponent extends Component {
       );
     }
     return (
-      <div className="row justify-content-center">
+      <div className="row">
         {this.state.series.map((media) => {
           return (
             <Banner

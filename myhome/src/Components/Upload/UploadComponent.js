@@ -75,11 +75,11 @@ class UploadComponent extends Component {
           //     "/" +
           //     this.state.mediaFile[i].name
           // );
-          this.setState({ isLoading: false });
-          window.location.href = env.web_server;
         })
         .catch((err) => console.log(err.message));
     }
+    this.setState({ isLoading: false });
+    alert("Uploaded");
   };
 
   uploadMedia_db = () => {

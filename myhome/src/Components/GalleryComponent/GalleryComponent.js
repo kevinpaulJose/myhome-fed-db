@@ -84,7 +84,7 @@ class GalleryComponent extends Component {
       );
     }
     return (
-      <div className="row justify-content-center">
+      <div className="row">
         {this.state.albums.map((media) => {
           return (
             <Banner

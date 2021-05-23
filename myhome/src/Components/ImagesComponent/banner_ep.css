@@ -3,26 +3,38 @@ img {
   -moz-user-drag: none;
   -o-user-drag: none;
 }
-img {
-  pointer-events: none;
+.img {
+  width: 100%; /* or any custom size */
+  height: 100%;
+  object-fit: contain;
 }
-.movie_card_ga {
+.movie_card_im {
   cursor: pointer;
   padding: 0 !important;
-  width: 170px;
-  margin: 14px;
-  height: 100px;
+  width: 150px;
+  /* margin: 12px; */
+  height: 150px;
   border-radius: 5%;
   box-shadow: 0 3px 4px 0 rgba(0, 0, 0, 0.2), 0 4px 15px 0 rgba(0, 0, 0, 0.19);
   background: linear-gradient(-45deg, #090a0d, #063040);
+
   /* background-color: red; */
 }
 
-.movie_card_se img {
+.img-outer {
+  width: 130px;
+  height: 130px;
+  /* background-color: red; */
+  position: relative;
+  top: 10px;
+  left: 8px;
+}
+
+/* .movie_card img {
   border-top-left-radius: 5%;
   border-top-right-radius: 5%;
   height: 440px;
-}
+} */
 .card-title {
   color: #afafaf;
   font-size: medium;
@@ -47,4 +59,16 @@ img {
   .component {
     display: block;
   }
+}
+
+h3 {
+  color: #fff;
+  margin-left: 10px;
+}
+
+#breadNav {
+  margin-left: 10px;
+}
+#NavLink {
+  text-decoration: none;
 }
