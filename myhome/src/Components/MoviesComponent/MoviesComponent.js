@@ -10,6 +10,7 @@ class MoviesComponent extends Component {
     this.state = {
       movies: [],
       isLoading: false,
+      language: "Tamil",
     };
     this.getMovies = this.getMovies.bind(this);
   }
@@ -37,11 +38,12 @@ class MoviesComponent extends Component {
           // console.log(data);
           if (data.response) {
             this.setState({ movies: data.rows, isLoading: false });
-            console.log(this.state.movies);
+            // console.log(this.state.movies);
           }
         })
         .catch((err) => console.log(err.message));
     } else {
+      this.setState({ language: "All" });
       fetch(env.db_server_endpoint + ":3000/api/v1/media/search", {
         body: JSON.stringify({
           user: env.user,
@@ -83,16 +85,74 @@ class MoviesComponent extends Component {
       );
     }
     return (
-      <div className="row">
-        {this.state.movies.map((movie) => {
-          return (
-            <Banner
-              key={movie.ShowID}
-              ShowPath={movie.ShowPath}
-              ShowName={movie.ShowName}
-            />
-          );
-        })}
+      <div>
+        <div className="language-filter">
+          <span
+            onClick={() => this.setState({ language: "All" })}
+            style={{
+              color: this.state.language === "All" ? "#96c685" : "#fff",
+              border:
+                this.state.language === "All" ? "solid #96c685 1px" : "none",
+            }}
+          >
+            All
+          </span>
+          <span
+            onClick={() => this.setState({ language: "Tamil" })}
+            style={{
+              color: this.state.language === "Tamil" ? "#96c685" : "#fff",
+              border:
+                this.state.language === "Tamil" ? "solid #96c685 1px" : "none",
+            }}
+          >
+            Tamil
+          </span>
+          <span
+            onClick={() => this.setState({ language: "English" })}
+            style={{
+              color: this.state.language === "English" ? "#96c685" : "#fff",
+              border:
+                this.state.language === "English"
+                  ? "solid #96c685 1px"
+                  : "none",
+            }}
+          >
+            English
+          </span>
+        </div>
+        <div className="row">
+          {this.state.movies.map((movie) => {
+            if (this.state.language === "All") {
+              return (
+                <Banner
+                  key={movie.ShowID}
+                  ShowPath={movie.ShowPath}
+                  ShowName={movie.ShowName}
+                />
+              );
+            } else if (this.state.language === "Tamil") {
+              if (movie.ShowLanguage === "Tamil") {
+                return (
+                  <Banner
+                    key={movie.ShowID}
+                    ShowPath={movie.ShowPath}
+                    ShowName={movie.ShowName}
+                  />
+                );
+              }
+            } else {
+              if (movie.ShowLanguage === "English") {
+                return (
+                  <Banner
+                    key={movie.ShowID}
+                    ShowPath={movie.ShowPath}
+                    ShowName={movie.ShowName}
+                  />
+                );
+              }
+            }
+          })}
+        </div>
       </div>
     );
   }

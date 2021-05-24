@@ -29,8 +29,9 @@ export function Banner(props) {
             </span>
           </div>
         </div>
-
-        <span className="card-title">{props.ShowName}</span>
+        <div id="movie-title">
+          <span className="card-title">{props.ShowName}</span>
+        </div>
       </div>
     </div>
   );

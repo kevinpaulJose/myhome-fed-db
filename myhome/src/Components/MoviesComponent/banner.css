@@ -6,11 +6,19 @@ img {
 img {
   pointer-events: none;
 }
+#movie-title {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 200px;
+  height: 30px;
+  /* white-space: nowrap; */
+  /* background-color: red; */
+}
 .movie_card {
   padding: 0 !important;
-  width: 350px;
+  width: 270px;
   margin: 14px;
-  height: 500px;
+  height: 420px;
   border-radius: 5%;
   box-shadow: 0 3px 4px 0 rgba(0, 0, 0, 0.2), 0 4px 15px 0 rgba(0, 0, 0, 0.19);
   background: linear-gradient(-45deg, #090a0d, #063040, #3d5037, #583c4a);
@@ -20,7 +28,7 @@ img {
 .movie_card img {
   border-top-left-radius: 5%;
   border-top-right-radius: 5%;
-  height: 440px;
+  height: 360px;
 }
 .card-title {
   color: #afafaf;
@@ -46,4 +54,23 @@ img {
   .component {
     display: block;
   }
+}
+
+.language-filter span {
+  margin: 10px;
+  /* border: solid black 1px; */
+  padding-top: 3px;
+  padding-bottom: 3px;
+  padding-left: 10px;
+  padding-right: 10px;
+  border-radius: 10%;
+  font-weight: 400;
+  color: #fff;
+}
+.language-filter span:hover {
+  cursor: pointer;
+}
+
+.language-filter {
+  padding-bottom: 10px;
 }
